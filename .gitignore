@@ -1,0 +1,8 @@
+.idea/
+java-compiler.iml
+target/
+output/
+
+Single.class
+UserObject.class
+UserObject$InnerUserObject.class

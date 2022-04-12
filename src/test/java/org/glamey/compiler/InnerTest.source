@@ -1,0 +1,15 @@
+package org.glamey.compiler;
+
+
+public class InnerTest{
+
+    public String out() {
+        return "this is the outer class method";
+    }
+
+    public static class InnerClazz {
+        public String inner() {
+            return "this is the inner class method";
+        }
+    }
+}
