@@ -6,8 +6,8 @@ public class Single {
     private String name;
 
     public Single() {
-        this.code = "zhangsan";
-        this.name = "张三";
+        this.code = "glamey";
+        this.name = "文曜";
     }
 
     public String getCode() {

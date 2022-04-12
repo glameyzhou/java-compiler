@@ -25,7 +25,7 @@ class DynamicJavaCompilerTest {
     void testGenBytesForSingle() throws IOException {
         String className = "org.glamey.compiler.Single";
         String javaSourceFile =
-                "/Users/yang.zhou/Documents/idea_projects/java-compiler/java-compiler/src/test/java/org/glamey"
+                "/Users/yang.zhou/Documents/idea_projects/java-compiler/src/test/java/org/glamey"
                         + "/compiler/Single.source";
         List<String> lines = Files.readAllLines(Paths.get(javaSourceFile), StandardCharsets.UTF_8);
         String javaSourceContent = String.join("", lines);
@@ -52,7 +52,7 @@ class DynamicJavaCompilerTest {
     void testGenBytesForInner() throws IOException {
         String className = "org.glamey.compiler.InnerTest";
         String javaSourceFile =
-                "/Users/yang.zhou/Documents/idea_projects/java-compiler/java-compiler/src/test/java/org/glamey"
+                "/Users/yang.zhou/Documents/idea_projects/java-compiler/src/test/java/org/glamey"
                         + "/compiler/InnerTest.source";
         List<String> lines = Files.readAllLines(Paths.get(javaSourceFile), StandardCharsets.UTF_8);
         String javaSourceContent = String.join("", lines);
@@ -78,7 +78,7 @@ class DynamicJavaCompilerTest {
     void testGenClazzForSingle() throws IOException {
         String className = "org.glamey.compiler.Single";
         String javaSourceFile =
-                "/Users/yang.zhou/Documents/idea_projects/java-compiler/java-compiler/src/test/java/org/glamey"
+                "/Users/yang.zhou/Documents/idea_projects/java-compiler/src/test/java/org/glamey"
                         + "/compiler/Single.source";
         List<String> lines = Files.readAllLines(Paths.get(javaSourceFile), StandardCharsets.UTF_8);
         String javaSourceContent = String.join("", lines);
@@ -91,8 +91,7 @@ class DynamicJavaCompilerTest {
                 Method toStringMethod = clazz.getMethod("toString", null);
                 toStringMethod.setAccessible(true);
                 Object obj = clazz.newInstance();
-                System.out.println(toStringMethod.invoke(obj, null));
-                Assertions.assertEquals("UserObject{code='zhangsan', name='张三'}", toStringMethod.invoke(obj, null));
+                Assertions.assertEquals("UserObject{code='glamey', name='文曜'}", toStringMethod.invoke(obj, null));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -103,7 +102,7 @@ class DynamicJavaCompilerTest {
     void testGenClazzForInner() throws IOException {
         String className = "org.glamey.compiler.InnerTest";
         String javaSourceFile =
-                "/Users/yang.zhou/Documents/idea_projects/java-compiler/java-compiler/src/test/java/org/glamey"
+                "/Users/yang.zhou/Documents/idea_projects/java-compiler/src/test/java/org/glamey"
                         + "/compiler/InnerTest.source";
         List<String> lines = Files.readAllLines(Paths.get(javaSourceFile), StandardCharsets.UTF_8);
         String javaSourceContent = String.join("", lines);
