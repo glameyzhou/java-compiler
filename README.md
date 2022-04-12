@@ -1,5 +1,5 @@
 # java-compiler
-- 动态的将Java源代码编译为字节码
+- 动态的将Java源代码编译为字节码，通过```javap -v className```来验证生成的字节码是否正确
 ```java
 String className = "org.glamey.compiler.InnerTest";
         String javaSourceFile =

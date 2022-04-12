@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.tools.Diagnostic;
+import javax.tools.Diagnostic.Kind;
 import javax.tools.DiagnosticCollector;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaCompiler.CompilationTask;
@@ -16,7 +17,14 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
 /**
- * 动态编译Java源文件
+ * 动态编译Java源文件（编译入口）
+ * <p>
+ * 具体实现详见 {@link JavaCompiler} 上面的注释.
+ * <p>
+ * {@link StandardJavaFileManager}标准的文件管理器，自定义实现${@link DynamicJavaFileManager}
+ * <p>
+ * {@link DiagnosticCollector} 诊断收集器，通过{@link Kind}来判断编译的问题类型
+ * <p>
  *
  * @author zhouyang01
  * Created on 20220412.
