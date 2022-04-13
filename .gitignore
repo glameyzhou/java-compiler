@@ -1,7 +1,8 @@
 .idea/
-java-compiler.iml
 target/
 output/
+
+java-compiler.iml
 
 Single.class
 UserObject.class

@@ -15,14 +15,14 @@
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
-        <jupiter.version>5.8.2</jupiter.version>
+        <juint-jupiter.version>5.8.2</juint-jupiter.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>${jupiter.version}</version>
+            <version>${juint-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
