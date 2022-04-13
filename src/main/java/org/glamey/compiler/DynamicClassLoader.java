@@ -12,7 +12,7 @@ import java.util.Map.Entry;
  */
 public class DynamicClassLoader extends ClassLoader {
 
-    private Map<String, JavaClassFileObject> classFileObjectMap = new HashMap<>();
+    private final Map<String, JavaClassFileObject> classFileObjectMap = new HashMap<>();
 
     public DynamicClassLoader(ClassLoader classLoader) {
         super(classLoader);

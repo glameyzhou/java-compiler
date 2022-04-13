@@ -68,7 +68,7 @@ public class DynamicJavaCompiler {
             }
             compile(diagnosticCollector, compilationTask);
             return classLoader.getBytes();
-        } catch (Throwable error) {
+        } catch (Exception error) {
             throw new RuntimeException("compile error:" + getErrorMessage(compilerErrors));
         } finally {
             compilationUnits.clear();

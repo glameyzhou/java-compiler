@@ -1,8 +1,6 @@
 package org.glamey.compiler;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FilterOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 
@@ -26,13 +24,17 @@ public class JavaClassFileObject extends SimpleJavaFileObject {
 
     @Override
     public OutputStream openOutputStream() {
-        return new FilterOutputStream(new ByteArrayOutputStream()) {
+        /*return new FilterOutputStream(new ByteArrayOutputStream()) {
             @Override
             public void close() throws IOException {
                 out.close();
                 byteArrayOutputStream = (ByteArrayOutputStream) out;
             }
-        };
+        };*/
+        if (byteArrayOutputStream == null) {
+            byteArrayOutputStream = new ByteArrayOutputStream();
+        }
+        return byteArrayOutputStream;
     }
 
     public byte[] getBytes() {
