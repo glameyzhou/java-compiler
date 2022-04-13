@@ -23,15 +23,32 @@ class DynamicJavaCompilerTest {
     private final String outputDir = "/Users/zhouyang01/java-compiler/";
     private final String sourceDir = "/Users/zhouyang01/IdeaProjects/java-compiler/src/test/java/org/glamey/compiler/";
 
+
+    private String buildJavaSource(String javaSourceFile) {
+        List<String> lines = null;
+        try {
+            lines = Files.readAllLines(Paths.get(javaSourceFile), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return String.join("", lines);
+    }
+
+
     @Test
-    void testGenBytesForSingle() throws IOException {
-        String className = "org.glamey.compiler.Single";
-        String javaSourceFile = sourceDir + "Single.source";
-        List<String> lines = Files.readAllLines(Paths.get(javaSourceFile), StandardCharsets.UTF_8);
-        String javaSourceContent = String.join("", lines);
+    void testGenBytesForSingle() {
+        String singleClassName = "org.glamey.compiler.Single";
+        String singleSourceFile = sourceDir + "Single.source";
+        String singleSourceContent = buildJavaSource(singleSourceFile);
+
+        String otherSingleClassName = "org.glamey.compiler.OtherSingle";
+        String otherSingleSourceFile = sourceDir + "OtherSingle.source";
+        String otherSingleSourceContent = buildJavaSource(otherSingleSourceFile);
+
         DynamicClassLoader classLoader = new DynamicClassLoader(DynamicJavaCompilerTest.class.getClassLoader());
         DynamicJavaCompiler compiler = new DynamicJavaCompiler(classLoader);
-        compiler.addSource(className, javaSourceContent);
+        compiler.addSource(singleClassName, singleSourceContent);
+        compiler.addSource(otherSingleClassName, otherSingleSourceContent);
         Map<String, byte[]> classNameByteMap = compiler.genClassBytes();
         classNameByteMap.forEach((clazzName, bytes) -> {
             try {
@@ -48,11 +65,11 @@ class DynamicJavaCompilerTest {
     }
 
     @Test
-    void testGenBytesForInner() throws IOException {
+    void testGenBytesForInner() {
         String className = "org.glamey.compiler.InnerTest";
         String javaSourceFile = sourceDir + "InnerTest.source";
-        List<String> lines = Files.readAllLines(Paths.get(javaSourceFile), StandardCharsets.UTF_8);
-        String javaSourceContent = String.join("", lines);
+        String javaSourceContent = buildJavaSource(javaSourceFile);
+
         DynamicClassLoader classLoader = new DynamicClassLoader(DynamicJavaCompilerTest.class.getClassLoader());
         DynamicJavaCompiler compiler = new DynamicJavaCompiler(classLoader);
         compiler.addSource(className, javaSourceContent);
@@ -71,21 +88,34 @@ class DynamicJavaCompilerTest {
     }
 
     @Test
-    void testGenClazzForSingle() throws IOException {
-        String className = "org.glamey.compiler.Single";
-        String javaSourceFile = sourceDir + "Single.source";
-        List<String> lines = Files.readAllLines(Paths.get(javaSourceFile), StandardCharsets.UTF_8);
-        String javaSourceContent = String.join("", lines);
+    void testGenClazzForSingle() {
+        String singleClassName = "org.glamey.compiler.Single";
+        String singleSourceFile = sourceDir + "Single.source";
+        String singleSourceContent = buildJavaSource(singleSourceFile);
+
+        String otherSingleClassName = "org.glamey.compiler.OtherSingle";
+        String otherSingleSourceFile = sourceDir + "OtherSingle.source";
+        String otherSingleSourceContent = buildJavaSource(otherSingleSourceFile);
+
+
         DynamicClassLoader classLoader = new DynamicClassLoader(DynamicJavaCompilerTest.class.getClassLoader());
         DynamicJavaCompiler compiler = new DynamicJavaCompiler(classLoader);
-        compiler.addSource(className, javaSourceContent);
+        compiler.addSource(singleClassName, singleSourceContent);
+        compiler.addSource(otherSingleClassName, otherSingleSourceContent);
         Map<String, Class<?>> clazzMap = compiler.genClasses();
         clazzMap.forEach((clazzName, clazz) -> {
+            if (!clazzName.equals("org.glamey.compiler.Single")) {
+                return;
+            }
             try {
                 Method toStringMethod = clazz.getMethod("toString", null);
                 toStringMethod.setAccessible(true);
                 Object obj = clazz.newInstance();
                 Assertions.assertEquals("UserObject{code='glamey', name='文曜'}", toStringMethod.invoke(obj, null));
+
+                Method getCodeMethod = clazz.getMethod("getCode", null);
+                getCodeMethod.setAccessible(true);
+                Assertions.assertEquals("otherSingle -> glamey", getCodeMethod.invoke(obj, null));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -93,11 +123,11 @@ class DynamicJavaCompilerTest {
     }
 
     @Test
-    void testGenClazzForInner() throws IOException {
+    void testGenClazzForInner() {
         String className = "org.glamey.compiler.InnerTest";
         String javaSourceFile = sourceDir + "InnerTest.source";
-        List<String> lines = Files.readAllLines(Paths.get(javaSourceFile), StandardCharsets.UTF_8);
-        String javaSourceContent = String.join("", lines);
+        String javaSourceContent = buildJavaSource(javaSourceFile);
+
         DynamicClassLoader classLoader = new DynamicClassLoader(DynamicJavaCompilerTest.class.getClassLoader());
         DynamicJavaCompiler compiler = new DynamicJavaCompiler(classLoader);
         compiler.addSource(className, javaSourceContent);

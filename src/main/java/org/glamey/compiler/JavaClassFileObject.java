@@ -24,13 +24,6 @@ public class JavaClassFileObject extends SimpleJavaFileObject {
 
     @Override
     public OutputStream openOutputStream() {
-        /*return new FilterOutputStream(new ByteArrayOutputStream()) {
-            @Override
-            public void close() throws IOException {
-                out.close();
-                byteArrayOutputStream = (ByteArrayOutputStream) out;
-            }
-        };*/
         if (byteArrayOutputStream == null) {
             byteArrayOutputStream = new ByteArrayOutputStream();
         }

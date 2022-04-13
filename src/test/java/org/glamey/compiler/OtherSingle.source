@@ -1,0 +1,9 @@
+package org.glamey.compiler;
+
+
+public class OtherSingle {
+    public String other(String message) {
+        System.out.println(message);
+        return "otherSingle -> " + message;
+    }
+}

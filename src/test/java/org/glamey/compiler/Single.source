@@ -4,14 +4,16 @@ package org.glamey.compiler;
 public class Single {
     private String code;
     private String name;
+    private OtherSingle otherSingle;
 
     public Single() {
         this.code = "glamey";
         this.name = "文曜";
+        otherSingle = new OtherSingle();
     }
 
     public String getCode() {
-        return code;
+        return otherSingle.other(this.code);
     }
 
     public String getName() {

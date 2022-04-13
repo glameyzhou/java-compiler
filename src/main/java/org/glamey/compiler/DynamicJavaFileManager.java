@@ -18,7 +18,6 @@ import javax.tools.JavaFileObject.Kind;
  */
 public class DynamicJavaFileManager extends ForwardingJavaFileManager<JavaFileManager> {
     private final DynamicClassLoader classLoader;
-
     private final List<JavaClassFileObject> javaClassFileObjects = new ArrayList<>();
 
     protected DynamicJavaFileManager(JavaFileManager fileManager, DynamicClassLoader classLoader) {
