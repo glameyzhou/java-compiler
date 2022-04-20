@@ -36,11 +36,14 @@ public class DynamicJavaCompiler {
     private final DynamicClassLoader classLoader;
     private final List<Diagnostic<? extends JavaFileObject>> compilerWarnings = new ArrayList<>();
     private final List<Diagnostic<? extends JavaFileObject>> compilerErrors = new ArrayList<>();
+    private final List<String> options = new ArrayList<>();
+
 
     public DynamicJavaCompiler(ClassLoader classLoader) {
         //compiler option 暂时不使用
         this.standardFileManager = javaCompiler.getStandardFileManager(null, null, null);
         this.classLoader = new DynamicClassLoader(classLoader);
+        options.add("-Xlint:unchecked");
     }
 
     public void addSource(String javaSourceName, String javaSourceContent) {
@@ -60,7 +63,7 @@ public class DynamicJavaCompiler {
         DynamicJavaFileManager fileManager =
                 new DynamicJavaFileManager(standardFileManager, classLoader);
         CompilationTask compilationTask =
-                javaCompiler.getTask(null, fileManager, diagnosticCollector, null, null, compilationUnits);
+                javaCompiler.getTask(null, fileManager, diagnosticCollector, options, null, compilationUnits);
 
         try {
             if (compilationUnits.isEmpty()) {
