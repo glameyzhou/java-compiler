@@ -57,7 +57,7 @@ public class DynamicJavaCompiler {
     public Map<String, byte[]> genClassBytes() {
         //清空编译异常
         compilerWarnings.clear();
-        compilerWarnings.clear();
+        compilerErrors.clear();
 
         DiagnosticCollector<JavaFileObject> diagnosticCollector = new DiagnosticCollector<>();
         DynamicJavaFileManager fileManager =
@@ -87,7 +87,7 @@ public class DynamicJavaCompiler {
     public Map<String, Class<?>> genClasses() {
         //清空编译异常
         compilerWarnings.clear();
-        compilerWarnings.clear();
+        compilerErrors.clear();
 
         DiagnosticCollector<JavaFileObject> diagnosticCollector = new DiagnosticCollector<>();
         DynamicJavaFileManager fileManager =
